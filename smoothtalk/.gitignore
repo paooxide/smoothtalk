@@ -1,0 +1,2 @@
+ignore all logs *.log
+ignore package.json
