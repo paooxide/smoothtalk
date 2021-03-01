@@ -4,7 +4,8 @@
   "description": "slack bot api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "api",
@@ -15,6 +16,11 @@
   "author": "adeoluwa",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "slackbots": "^1.2.0",
+    "mongoose": "^5.0.0"
+  },
+  
+
 }

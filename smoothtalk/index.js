@@ -6,15 +6,17 @@ let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 const config = require('./config/config.js');
 
+const botsdk = require("slackbots");
+const axios = require("axios");
+
+
+
 process.env.NODE_ENV = 'development';
 // uncomment below line to move this code against production environment
 // process.env.NODE_ENV = 'staging';
 
 // Initialise the app
 let app = express();
-
-
-
 
 // Import routes
 let apiRoutes = require("./routers/api-routes");
@@ -37,6 +39,21 @@ else
 
 // Setup server port
 var port = process.env.PORT || 8080;
+
+
+bot = new SlackBot({
+  name: "smooth talk",
+  token: "xoxb-1816610715921-1806517601586-ujTwV2UVnWWvy1Um8QG4btyB",
+});
+
+bot.on("start", () => {
+  const params = {
+    icon_emoji: ":smile:",
+  };
+
+  bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
+});
+
 
 // Send message for default URL
 app.get('/', (req, res) => res.send(`Hello, Welcome to ${global.gConfig.app_name}`));
