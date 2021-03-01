@@ -19,8 +19,7 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "slackbots": "^1.2.0",
-    "mongoose": "7.5.3",
-    "body-parser": "7.5.3"
+    "mongoose": "^5.0.0",
   }
   
 
