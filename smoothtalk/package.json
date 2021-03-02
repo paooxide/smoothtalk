@@ -19,7 +19,8 @@
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "slackbots": "^1.2.0",
-    "mongoose": "latest"
+    "mongoose": "latest",
+    "body-parser":"latest"
   }
   
 
