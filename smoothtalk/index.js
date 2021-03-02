@@ -1,67 +1,20 @@
-// Import express
-let express = require('express');
-// Import Body parser
-let bodyParser = require('body-parser');
-// Import Mongoose
-let mongoose = require('mongoose');
-const config = require('./config/config.js');
+const { App } = require('@slack/bolt');
 
-const botsdk = require("slackbots");
-const axios = require("axios");
-
-
-
-process.env.NODE_ENV = 'development';
-// uncomment below line to move this code against production environment
-// process.env.NODE_ENV = 'staging';
-
-// Initialise the app
-let app = express();
-
-// Import routes
-let apiRoutes = require("./routers/api-routes");
-
-
-// Configure bodyparser to handle post requests
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-// Connect to Mongoose and set connection variable
-// mongoose.connect(`${global.gConfig.database}`, { useNewUrlParser: true,useUnifiedTopology: true});
-mongoose.connect("mongodb+srv://taurus:taurus84881138@cluster-taurus.ppzuy.mongodb.net/slackbotDB?retryWrites=true&w=majority", { useNewUrlParser: true,useUnifiedTopology: true});
-var db = mongoose.connection;
-
-// Added check for DB connection
-if(!db)
-    console.log(`Error connecting db to ${global.gConfig.app_name} `)
-else
-    console.log(`Db connected successfully to ${global.gConfig.app_name}`)
-
-// Setup server port
-var port = process.env.PORT || 8080;
-
-
-bot = new SlackBot({
-  name: "smooth talk",
-  token: "xoxb-1816610715921-1806517601586-ujTwV2UVnWWvy1Um8QG4btyB",
+const app = new App({
+    token: "xoxb-1816610715921-1806517601586-BEYLAJn6dSb1sCCbAQM3bM9M",
+    signingSecret: "5c19978b7c543a8f6591d3ff6d089241"
 });
 
-bot.on("start", () => {
-  const params = {
-    icon_emoji: ":smile:",
-  };
+/* Add functionality here */
 
-  bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
-});
+(async () => {
+  // Start the app
+  await app.start(process.env.PORT || 3000);
 
+  console.log('⚡️ Bolt app is running!');
+})();
 
-// Send message for default URL
-app.get('/', (req, res) => res.send(`Hello, Welcome to ${global.gConfig.app_name}`));
-
-// Use Api routes in the App
-app.use('/api', apiRoutes);
-// Launch app to listen to specified port
-app.listen(port, function () {
-    console.log(`Running ${global.gConfig.app_name} on port ` + port);
-});
+app.message(async ({ message, say }) => {
+    const reversedText = [...message.text].reverse().join("");
+    await say(reversedText);
+  });

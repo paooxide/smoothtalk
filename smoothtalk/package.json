@@ -16,12 +16,10 @@
   "author": "adeoluwa",
   "license": "ISC",
   "dependencies": {
+    "@slack/bolt": "^3.2.0",
     "axios": "^0.21.1",
+    "body-parser": "latest",
     "express": "^4.17.1",
-    "slackbots": "^1.2.0",
-    "mongoose": "latest",
-    "body-parser":"latest"
+    "mongoose": "latest"
   }
-  
-
 }
