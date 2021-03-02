@@ -28,7 +28,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
-mongoose.connect(`${global.gConfig.database}`, { useNewUrlParser: true});
+// mongoose.connect(`${global.gConfig.database}`, { useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect("mongodb+srv://taurus:taurus84881138@cluster-taurus.ppzuy.mongodb.net/slackbotDB?retryWrites=true&w=majority", { useNewUrlParser: true,useUnifiedTopology: true});
 var db = mongoose.connection;
 
 // Added check for DB connection
