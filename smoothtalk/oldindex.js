@@ -42,30 +42,6 @@ else
 var port = process.env.PORT || 8080;
 
 
-bot = new SlackBot({
-  name: 'smooth talk',
-  token: 'xoxb-1816610715921-1806517601586-hhPtvkzaL8j2NbVY0knVDBMD',
-});
-
-bot.on('start', () => {
-  const params = {
-    icon_emoji: ":smile:",
-  };
-
-  bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
-  bot.postMessageToUser('ogunye4pao', 'meow!', params); 
-});
-
-bot.on('error', err => console.error(err));
-
-bot.on('message', data => {
-    if (data.type !== 'message') {
-        return;
-    }
-    console.log(data)
-})
-
-
 
 
 // Send message for default URL
