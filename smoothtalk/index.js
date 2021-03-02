@@ -55,6 +55,14 @@ bot.on("start", () => {
   bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
 });
 
+bot.on('error', err => console.error(err));
+
+bot.on('message', data => {
+    if (data.type !== 'message') {
+        return;
+    }
+    console.log(data)
+})
 
 // Send message for default URL
 app.get('/', (req, res) => res.send(`Hello, Welcome to ${global.gConfig.app_name}`));
