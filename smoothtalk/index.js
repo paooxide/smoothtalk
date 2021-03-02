@@ -35,6 +35,14 @@ app.message('hello', async ({ message, say }) => {
     });
 });
 
+
+app.action('button_click', async ({ body, ack, say }) => {
+    // Acknowledge the action
+    await ack();
+    await say(`<@${body.user.id}> clicked the button`);
+  });
+
+  
 (async () => {
     // Start the app
     await app.start(process.env.PORT || 3000);
