@@ -43,16 +43,17 @@ var port = process.env.PORT || 8080;
 
 
 bot = new SlackBot({
-  name: "smooth talk",
-  token: "xoxb-1816610715921-1806517601586-ujTwV2UVnWWvy1Um8QG4btyB",
+  name: 'smooth talk',
+  token: 'xoxb-1816610715921-1806517601586-ujTwV2UVnWWvy1Um8QG4btyB',
 });
 
-bot.on("start", () => {
+bot.on('start', () => {
   const params = {
     icon_emoji: ":smile:",
   };
 
   bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
+  bot.postMessageToUser('ogunye4pao', 'meow!', params); 
 });
 
 bot.on('error', err => console.error(err));
