@@ -244,12 +244,13 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
                 "type": "input",
                 "element": {
                     "action_id": "free_text",
-                    "type": "plain_text_input"
+                    "type": "plain_text_input",
+                    "multiline":true
                 },
                 "label": {
                     "type": "plain_text",
                     "text": "What are the first 3 digits on the number scale?",
-                    "emoji": false
+                    "emoji": true
                 }
             }
 
