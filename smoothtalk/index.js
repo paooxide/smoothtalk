@@ -6,6 +6,7 @@ let mongoose = require('mongoose');
 const config = require('./config/config.js');
 let apiRoutes = require("./routers/api-routes");
 SlackBot = require("./model/slackbotModel");
+botController= require("./controller/slackbotController")
 
 
 // var botSave = new botController();
@@ -308,37 +309,32 @@ app.action('number_scale', async ({ body, ack, say }) => {
     userResponse.numberScaleQuestion = body.actions[0].selected_option.value
     console.log(body.actions[0].selected_option.value);
     console.log(userResponse)
+
+    var slackbotRes = new SlackBot();
+    slackbotRes.userID = userResponse.userID ? userResponse.userID : slackbotRes.userID;
+    slackbotRes.feeling = userResponse.feeling;
+    slackbotRes.freeTimeStart = userResponse.freeTimeStart;
+    slackbotRes.freeTimeStop = userResponse.freeTimeStop;
+    slackbotRes.hobbies = userResponse.hobbies;
+    slackbotRes.numberScaleQuestion = userResponse.numberScaleQuestion;
+    slackbotRes.save(function (err) {
+        if (err)
+            console.log(err);
+        // else
+        //     return "New Response created!"
+    });
+
     await say(`Thank you <@${body.user.id}> `);
 });
 
 console.log(userResponse)
-saveBotRequest(userResponse)
+// botController.saveBotRequest(userResponse)
 
 app.action('button_click', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     await say(`<@${body.user.id}> clicked the button`);
 });
-
-
-
-
-function saveBotRequest(request) {
-    var slackbotRes = new SlackBot();
-    slackbotRes.userID = request.userID ? request.userID : slackbotRes.userID;
-    slackbotRes.feeling = request.feeling;
-    slackbotRes.freeTimeStart = request.freeTimeStart;
-    slackbotRes.freeTimeStop = request.freeTimeStop;
-    slackbotRes.hobbies = request.hobbies;
-    slackbotRes.numberScaleQuestion = request.numberScaleQuestion;
-    // save the SlackBot rsponse and check for errors
-    slackbotRes.save(function (err) {
-        if (err)
-            console.log(err);
-        else
-            return "New Response created!"
-    });
-};
 
 
 app.use('/api', apiRoutes);
