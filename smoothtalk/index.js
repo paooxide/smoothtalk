@@ -125,7 +125,7 @@ app.action('static_select-action', async ({ body, ack, say }) => {
                 }
             }
         ],
-        text: `Hey there <@${message.user}>!`
+        // text: `Hey there <@${message.user}>!`
     });
 
 });
@@ -158,7 +158,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
             }
 
         ],
-        text: `Hey there <@${message.user}>!`
+        // text: `Hey there <@${message.user}>!`
     });
 
 });
@@ -226,7 +226,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
             }
 
         ],
-        text: `Hey there <@${message.user}>!`
+        // text: `Hey there <@${message.user}>!`
     });
 });
 
@@ -258,7 +258,7 @@ app.action('favoriteHobbies', async ({ body, ack, say }) => {
               }
 
         ],
-        text: `Hey there <@${message.user}>!`
+        // text: `Hey there <@${message.user}>!`
     });
 });
 
