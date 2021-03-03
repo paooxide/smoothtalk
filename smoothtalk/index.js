@@ -274,7 +274,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
 
 
 
-app.action('free_text', async ({ body, ack, say }) => {
+app.action('number_scale', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body);
