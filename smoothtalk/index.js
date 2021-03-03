@@ -16,7 +16,7 @@ const app = new App({
 app.message('hello', async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
 
-    say(`Welcome!`);
+    await say(`Welcome!`);
     await say({
         blocks: [
             {
@@ -136,7 +136,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body);
-    say(`<@${body.user.id}> Please select time `);
+    await say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
             {
