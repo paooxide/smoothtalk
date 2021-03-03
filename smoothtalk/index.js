@@ -17,8 +17,8 @@ const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_
 dotenv.config();
 
 const app = new App({
-    receiver,
     token: process.env.SLACK_BOT_TOKEN,
+    receiver
 });
 
 /* Add functionality here */
