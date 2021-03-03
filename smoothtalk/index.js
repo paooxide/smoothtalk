@@ -12,9 +12,7 @@ dotenv.config();
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
-    receiver
-    // signingSecret: process.env.SLACK_SIGNING_SECRET
-    
+    signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
 /* Add functionality here */
@@ -348,7 +346,7 @@ receiver.router.get('/response/:userID', (req, res) => {
 
 (async () => {
     // Start the app
-    await app.start(process.env.PORT || 3000);
+    await app.start(process.env.PORTA || 3000);
 
     console.log('⚡️ Bolt app is running!');
 })();

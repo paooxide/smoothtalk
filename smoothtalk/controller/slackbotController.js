@@ -18,24 +18,6 @@ SlackBot = require("../model/slackbotModel");
 // });
 
 
-// function saveBotRequest (request) {
-//     var slackbotRes = new SlackBot();
-//     slackbotRes.userID = request.userID ? request.userID : slackbotRes.userID;
-//     slackbotRes.feeling = request.feeling;
-//     slackbotRes.freeTimeStart = request.freeTimeStart;
-//     slackbotRes.freeTimeStop = request.freeTimeStop;
-//     slackbotRes.hobbies = request.hobbies;
-//     slackbotRes.numberScaleQuestion = request.numberScaleQuestion;
-//     // save the SlackBot rsponse and check for errors
-//     slackbotRes.save(function (err) {
-//       // if (err)
-//       //     res.json(err);
-//       res.json({
-//         message: "New Response created!",
-//         data: slackbotRes,
-//       });
-//     });
-//   };
 
 // Handle index actions
 exports.index = function (req, res) {
@@ -53,6 +35,7 @@ exports.index = function (req, res) {
     });
   });
 };
+
 // Handle create SlackBot actions
 exports.new = function (req, res) {
   var slackbotRes = new SlackBot();
@@ -122,9 +105,6 @@ exports.delete = function (req, res) {
     }
   );
 };
-
-
-
 
 
 

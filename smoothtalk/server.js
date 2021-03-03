@@ -1,13 +1,11 @@
-// Import express
 let express = require('express');
-// Import Body parser
 let bodyParser = require('body-parser');
-// Import Mongoose
 let mongoose = require('mongoose');
 const config = require('./config/config.js');
-
-const { App } = require('@slack/bolt');
 const axios = require("axios");
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 
 
@@ -29,7 +27,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 // Connect to Mongoose and set connection variable
 // mongoose.connect(`${global.gConfig.database}`, { useNewUrlParser: true,useUnifiedTopology: true});
-mongoose.connect("mongodb+srv://taurus:taurus84881138@cluster-taurus.ppzuy.mongodb.net/slackbotDB?retryWrites=true&w=majority", { useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true,useUnifiedTopology: true});
 var db = mongoose.connection;
 
 // Added check for DB connection
@@ -39,7 +37,7 @@ else
     console.log(`Db connected successfully to ${global.gConfig.app_name}`)
 
 // Setup server port
-var port = process.env.PORT || 8080;
+var port = process.env.PORTB || 8081;
 
 
 
