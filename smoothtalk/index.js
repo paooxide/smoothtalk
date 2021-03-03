@@ -17,7 +17,7 @@ var userResponse = {};
 app.message('hello', async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
     // userResponse.userID=message
-    console.log(message);
+    // console.log(message);
     await say(`Welcome!`);
     await say({
         blocks: [
@@ -106,7 +106,7 @@ app.message('hello', async ({ message, say }) => {
 app.action('static_select-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions[0].selected_option.value);
+    console.log(body);
     userResponse.feeling=body.actions[0].selected_option.value
     await say({
         blocks: [
