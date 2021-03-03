@@ -106,7 +106,8 @@ app.message('hello', async ({ message, say }) => {
 app.action('static_select-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body);
+    console.log(body.user.username);
+    userResponse.userID=body.user.username
     userResponse.feeling=body.actions[0].selected_option.value
     await say({
         blocks: [
