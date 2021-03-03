@@ -1,24 +1,20 @@
 const { App, ExpressReceiver } = require('@slack/bolt');
 const dotenv = require('dotenv');
-// let express = require('express');
-// let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 const config = require('./config/config.js');
-// let apiRoutes = require("./routers/api-routes");
 SlackBot = require("./model/slackbotModel");
-// botController= require("./controller/slackbotController")
 
-const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET });
+const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET, clientId: process.env.SLACK_CLIENT_ID,clientSecret: process.env.SLACK_CLIENT_SECRET});
 
-
-// var botSave = new botController();
 
 
 dotenv.config();
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
-    signingSecret: process.env.SLACK_SIGNING_SECRET
+    receiver
+    // signingSecret: process.env.SLACK_SIGNING_SECRET
+    
 });
 
 /* Add functionality here */
@@ -37,9 +33,7 @@ else
 
 
 app.message('hello', async ({ message, say }) => {
-    // say() sends a message to the channel where the event was triggered
-    // userResponse.userID=message
-    // console.log(message);
+    
     await say(`Welcome!`);
     await say({
         blocks: [
@@ -129,13 +123,9 @@ app.action('static_select-action', async ({ body, ack, say }) => {
 });
 
 
-
 app.action('datepicker-action', async ({ body, ack, say }) => {
-    // Acknowledge the action
     await ack();
-    console.log(body.actions[0].selected_date);
     userResponse.freeTimeStart = body.actions[0].selected_date
-    // await say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
             {
@@ -157,7 +147,6 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
             }
 
         ],
-        // text: `Hey there <@${message.user}>!`
     });
 
 });
@@ -165,9 +154,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
 
 
 app.action('timepicker-action', async ({ body, ack, say }) => {
-    // Acknowledge the action
     await ack();
-    console.log(body.actions[0].selected_time);
     userResponse.freeTimeStop = body.actions[0].selected_time
     await say({
         blocks: [
@@ -226,7 +213,6 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
             }
 
         ],
-        // text: `Hey there <@${message.user}>!`
     });
 });
 
@@ -234,7 +220,6 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 
 
 app.action('favorite_hobbies', async ({ body, ack, say }) => {
-    // Acknowledge the action
     await ack();
     var hobbies;
     console.log(body.actions[0].selected_options);
@@ -271,7 +256,6 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
             }
 
         ],
-        // text: `Hey there <@${message.user}>!`
     });
 });
 
@@ -294,15 +278,13 @@ app.action('number_scale', async ({ body, ack, say }) => {
     slackbotRes.save(function (err) {
         if (err)
             console.log(err);
-        // else
-        //     return "New Response created!"
+        
     });
 
     await say(`Thank you <@${body.user.id}> `);
 });
 
 console.log(userResponse)
-// botController.saveBotRequest(userResponse)
 
 app.action('button_click', async ({ body, ack, say }) => {
     // Acknowledge the action
