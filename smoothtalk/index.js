@@ -42,7 +42,7 @@ app.message('hello', async ({ message, say }) => {
                                 "text": "Doing Well",
                                 "emoji": true
                             },
-                            "value": "value-0"
+                            "value": "Doing Well"
                         },
                         {
                             "text": {
@@ -50,7 +50,7 @@ app.message('hello', async ({ message, say }) => {
                                 "text": "Neutral",
                                 "emoji": true
                             },
-                            "value": "value-1"
+                            "value": "Neutral"
                         },
                         {
                             "text": {
@@ -58,7 +58,7 @@ app.message('hello', async ({ message, say }) => {
                                 "text": "Feeling Lucky",
                                 "emoji": true
                             },
-                            "value": "value-2"
+                            "value": "Feeling Lucky"
                         }
                     ],
                     "action_id": "static_select-action"
@@ -104,7 +104,7 @@ app.message('hello', async ({ message, say }) => {
 app.action('static_select-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions);
+    console.log(body.actions[0].selected_option.value);
     await say({
         blocks: [
             {
