@@ -10,20 +10,13 @@ const app = new App({
 
 /* Add functionality here */
 
-var userResponse = {
-    userID,
-    feeling,
-    freeTimeStart, 
-    freeTimeStop,
-    hobbies,
-    numberScaleQuestion,
-};
+var userResponse = {};
 
 
 
 app.message('hello', async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
-
+    userResponse.userID=message.user
     await say(`Welcome!`);
     await say({
         blocks: [
