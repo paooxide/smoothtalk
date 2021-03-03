@@ -1,4 +1,4 @@
-const { App } = require('@slack/bolt');
+const { App, ExpressReceiver } = require('@slack/bolt');
 const dotenv = require('dotenv');
 // let express = require('express');
 // let bodyParser = require('body-parser');
@@ -8,6 +8,8 @@ const config = require('./config/config.js');
 SlackBot = require("./model/slackbotModel");
 // botController= require("./controller/slackbotController")
 
+const receiver = new ExpressReceiver({ signingSecret: process.env.SLACK_SIGNING_SECRET });
+
 
 // var botSave = new botController();
 
@@ -15,7 +17,7 @@ SlackBot = require("./model/slackbotModel");
 dotenv.config();
 
 const app = new App({
-    signingSecret: process.env.SLACK_SIGNING_SECRET,
+    receiver,
     token: process.env.SLACK_BOT_TOKEN,
 });
 
@@ -91,34 +93,6 @@ app.message('hello', async ({ message, say }) => {
     });
 });
 
-
-
-
-// app.message('hellott', async ({ message, say }) => {
-//     // say() sends a message to the channel where the event was triggered
-
-//     await say(`Welcome! How are you doing ?`);
-//     await say({
-//         blocks: [
-//             {
-//                 "type": "section",
-//                 "text": {
-//                     "type": "mrkdwn",
-//                     "text": `Hey there <@${message.user}>!`
-//                 },
-//                 "accessory": {
-//                     "type": "button",
-//                     "text": {
-//                         "type": "plain_text",
-//                         "text": "Click Me"
-//                     },
-//                     "action_id": "button_click"
-//                 }
-//             }
-//         ],
-//         text: `Hey there <@${message.user}>!`
-//     });
-// });
 
 
 
@@ -337,7 +311,57 @@ app.action('button_click', async ({ body, ack, say }) => {
 });
 
 
-// app.use('/api', apiRoutes);
+
+receiver.router.get('/viewresponse', (req, res) => {
+    SlackBot.get(function (err, botResponse) {
+        if (err) {
+          res.json({
+            status: "error",
+            message: err,
+          });
+        }
+        res.json({
+          status: "success",
+          message: "Slack response retrieved successfully",
+          data: botResponse,
+        });
+      });
+  });
+
+
+receiver.router.post('/newresponse', (req, res) => {
+    var slackbotRes = new SlackBot();
+    slackbotRes.userID = req.body.userID ? req.body.userID : slackbotRes.userID;
+    slackbotRes.feeling = req.body.feeling;
+    slackbotRes.freeTimeStart = req.body.freeTimeStart;
+    slackbotRes.freeTimeStop = req.body.freeTimeStop;
+    slackbotRes.hobbies = req.body.hobbies;
+    slackbotRes.numberScaleQuestion = req.body.numberScaleQuestion;
+    // save the SlackBot rsponse and check for errors
+    slackbotRes.save(function (err) {
+      // if (err)
+      //     res.json(err);
+      res.json({
+        message: "New Response created!",
+        data: slackbotRes,
+      });
+    });
+
+});
+
+
+
+receiver.router.get('/response/:userID', (req, res) => {
+    SlackBot.find({ userID: req.params.userID }, function (err, slackbotRes) {
+        if (err) res.send(err);
+        res.json({
+          message: "Response loaded successfully",
+          data: slackbotRes,
+        });
+      });
+});
+
+
 
 
 (async () => {
