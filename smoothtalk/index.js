@@ -277,7 +277,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
 app.action('number_scale', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options.toString());
+    console.log(body.actions.selected_options);
     await say(`Thank you <@${body.user.id}> `);
 });
 
