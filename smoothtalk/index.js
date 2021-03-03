@@ -23,11 +23,11 @@ const app = new App({
 var userResponse = {};
 
 
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 
 // Added check for DB connection
-if(!db)
+if (!db)
     console.log(`Error connecting db to ${global.gConfig.app_name} `)
 else
     console.log(`Db connected successfully to ${global.gConfig.app_name}`)
@@ -126,8 +126,8 @@ app.action('static_select-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     // console.log(body.user.username);
-    userResponse.userID=body.user.username
-    userResponse.feeling=body.actions[0].selected_option.value
+    userResponse.userID = body.user.username
+    userResponse.feeling = body.actions[0].selected_option.value
     await say({
         blocks: [
             {
@@ -159,7 +159,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body.actions[0].selected_date);
-    userResponse.freeTimeStart=body.actions[0].selected_date
+    userResponse.freeTimeStart = body.actions[0].selected_date
     // await say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
@@ -193,7 +193,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body.actions[0].selected_time);
-    userResponse.freeTimeStop=body.actions[0].selected_time
+    userResponse.freeTimeStop = body.actions[0].selected_time
     await say({
         blocks: [
             {
@@ -264,8 +264,8 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
     var hobbies;
     console.log(body.actions[0].selected_options);
     hobbies = body.actions[0].selected_options.map(hob => hob.value);
-    
-    userResponse.hobbies=hobbies.toString();
+
+    userResponse.hobbies = hobbies.toString();
     await say({
         blocks: [
             {
@@ -305,7 +305,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
 app.action('number_scale', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    userResponse.numberScaleQuestion=body.actions[0].selected_option.value
+    userResponse.numberScaleQuestion = body.actions[0].selected_option.value
     console.log(body.actions[0].selected_option.value);
     console.log(userResponse)
     await say(`Thank you <@${body.user.id}> `);
@@ -323,7 +323,7 @@ app.action('button_click', async ({ body, ack, say }) => {
 
 
 
-function saveBotRequest (request) {
+function saveBotRequest(request) {
     var slackbotRes = new SlackBot();
     slackbotRes.userID = request.userID ? request.userID : slackbotRes.userID;
     slackbotRes.feeling = request.feeling;
@@ -333,14 +333,12 @@ function saveBotRequest (request) {
     slackbotRes.numberScaleQuestion = request.numberScaleQuestion;
     // save the SlackBot rsponse and check for errors
     slackbotRes.save(function (err) {
-      // if (err)
-      //     res.json(err);
-      res.json({
-        message: "New Response created!",
-        data: slackbotRes,
-      });
+        if (err)
+            res.json(err);
+        else
+            return "New Response created!"
     });
-  };
+};
 
 
 app.use('/api', apiRoutes);
