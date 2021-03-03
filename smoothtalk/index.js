@@ -8,7 +8,7 @@ let apiRoutes = require("./routers/api-routes");
 let botController = require("./controller/slackbotController");
 
 
-var botSave = new botController();
+// var botSave = new botController();
 
 
 dotenv.config();
@@ -312,7 +312,7 @@ app.action('number_scale', async ({ body, ack, say }) => {
 });
 
 console.log(userResponse)
-botSave.saveBotRequest(userResponse)
+botController.saveBotRequest(userResponse)
 
 app.action('button_click', async ({ body, ack, say }) => {
     // Acknowledge the action
