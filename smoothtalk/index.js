@@ -16,7 +16,7 @@ const app = new App({
 app.message('hello', async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
 
-    await say(`Welcome!`);
+    say(`Welcome!`);
     await say({
         blocks: [
             {
@@ -136,7 +136,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body);
-    await say(`<@${body.user.id}> Please select time `);
+    say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
             {
@@ -258,7 +258,7 @@ app.action('favoriteHobbies', async ({ body, ack, say }) => {
               }
 
         ],
-        // text: `Hey there <@${message.user}>!`
+ ,       // text: `Hey there <@${message.user}>!`
     });
 });
 
