@@ -179,7 +179,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
                     "text": "What are your favorite hobbies"
                 },
                 "accessory": {
-                    "action_id": "favoriteHobbies",
+                    "action_id": "favorite_hobbies",
                     "type": "multi_static_select",
                     "placeholder": {
                         "type": "plain_text",
@@ -233,7 +233,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 
 
 
-app.action('favoriteHobbies', async ({ body, ack, say }) => {
+app.action('favorite_hobbies', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body);
@@ -244,18 +244,18 @@ app.action('favoriteHobbies', async ({ body, ack, say }) => {
                 "type": "input",
                 "block_id": "input123",
                 "label": {
-                  "type": "plain_text",
-                  "text": "Label of input"
+                    "type": "plain_text",
+                    "text": "What are the first 3 digits on the number scale?"
                 },
                 "element": {
-                  "type": "plain_text_input",
-                  "action_id": "freeText",
-                  "placeholder": {
-                    "type": "plain_text",
-                    "text": "Enter some plain text"
-                  }
+                    "type": "plain_text_input",
+                    "action_id": "free_text",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Enter your answer"
+                    }
                 }
-              }
+            }
 
         ],
         // text: `Hey there <@${message.user}>!`
@@ -264,7 +264,7 @@ app.action('favoriteHobbies', async ({ body, ack, say }) => {
 
 
 
-app.action('freeText', async ({ body, ack, say }) => {
+app.action('free_text', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body);
