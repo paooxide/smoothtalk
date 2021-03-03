@@ -334,7 +334,7 @@ function saveBotRequest(request) {
     // save the SlackBot rsponse and check for errors
     slackbotRes.save(function (err) {
         if (err)
-            res.json(err);
+            console.log(err);
         else
             return "New Response created!"
     });
