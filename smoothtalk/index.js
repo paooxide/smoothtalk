@@ -243,7 +243,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
     var hobbies ="";
     console.log(body.actions[0].selected_options);
     for(hob in body.actions[0].selected_options){
-        hobbies += bob.value + ", " 
+        hobbies += hob.value + ", " 
     }
     userResponse.hobbies=hobbies;
     await say({
