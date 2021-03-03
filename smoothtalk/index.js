@@ -4,9 +4,9 @@ const dotenv = require('dotenv');
 // let bodyParser = require('body-parser');
 let mongoose = require('mongoose');
 const config = require('./config/config.js');
-let apiRoutes = require("./routers/api-routes");
+// let apiRoutes = require("./routers/api-routes");
 SlackBot = require("./model/slackbotModel");
-botController= require("./controller/slackbotController")
+// botController= require("./controller/slackbotController")
 
 
 // var botSave = new botController();
