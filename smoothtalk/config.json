@@ -4,7 +4,7 @@
         "app_name": "Smooth Talk",
         "app_desc": "Slackbot app to schedule your free time",
         "node_port": 8080,
-        "json_indentation": 4,
+        "json_indentation": 4
     },
     "testing": {
         
