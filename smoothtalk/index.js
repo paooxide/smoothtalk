@@ -240,12 +240,11 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 app.action('favorite_hobbies', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    var hobbies ="";
+    var hobbies;
     console.log(body.actions[0].selected_options);
-    for(hob in body.actions[0].selected_options){
-        hobbies += hob.value + ", " 
-    }
-    userResponse.hobbies=hobbies;
+    hobbies = body.actions[0].selected_options.map(hob => hob.value);
+    
+    userResponse.hobbies=hobbies.toString();
     await say({
         blocks: [
             {
