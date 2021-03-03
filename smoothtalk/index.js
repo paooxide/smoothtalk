@@ -13,7 +13,7 @@ const app = new App({
 
 
 
-app.message('hellott', async ({ message, say }) => {
+app.message('hello', async ({ message, say }) => {
     // say() sends a message to the channel where the event was triggered
     
     await say(`Welcome!`);
