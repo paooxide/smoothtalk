@@ -168,7 +168,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
 app.action('timepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options[0]);
+    console.log(body.actions.selected_options.toString());
     await say({
         blocks: [
             {
