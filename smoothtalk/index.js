@@ -241,16 +241,29 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
     await say({
         blocks: [
             {
-                "type": "input",
-                "element": {
-                    "action_id": "free_text",
-                    "type": "plain_text_input",
-                    "multiline":true
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": "What are the first 3 digits on the number scale?"
                 },
-                "label": {
-                    "type": "plain_text",
-                    "text": "What are the first 3 digits on the number scale?",
-                    "emoji": true
+                "accessory": {
+                    "type": "static_select",
+                    "placeholder": {
+                        "type": "plain_text",
+                        "text": "Select an item",
+                        "emoji": true
+                    },
+                    "options": [
+                        {
+                            "text": {
+                                "type": "plain_text",
+                                "text": "1, 2, 3",
+                                "emoji": true
+                            },
+                            "value": "value-0"
+                        }
+                    ],
+                    "action_id": "number_scale"
                 }
             }
 
