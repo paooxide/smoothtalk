@@ -135,7 +135,7 @@ app.action('static_select-action', async ({ body, ack, say }) => {
 app.action('datepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions[0]);
+    console.log(body.actions[0].selected_date);
     await say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
@@ -168,7 +168,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
 app.action('timepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions[0]);
+    console.log(body.actions[0].selected_time);
     await say({
         blocks: [
             {
@@ -191,35 +191,35 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
                                 "type": "plain_text",
                                 "text": "Football"
                             },
-                            "value": "value-0"
+                            "value": "Football"
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Music"
                             },
-                            "value": "value-1"
+                            "value": "Music"
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Sleep"
                             },
-                            "value": "value-2"
+                            "value": "Sleep"
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Movies"
                             },
-                            "value": "value-3"
+                            "value": "Movies"
                         },
                         {
                             "text": {
                                 "type": "plain_text",
                                 "text": "Basketball"
                             },
-                            "value": "value-4"
+                            "value": "Basketball"
                         }
                     ]
                 }
@@ -236,7 +236,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 app.action('favorite_hobbies', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions[0]);
+    console.log(body.actions[0].selected_options[0]);
 
     await say({
         blocks: [
@@ -260,7 +260,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
                                 "text": "1, 2, 3",
                                 "emoji": true
                             },
-                            "value": "value-0"
+                            "value": "1, 2, 3"
                         }
                     ],
                     "action_id": "number_scale"
