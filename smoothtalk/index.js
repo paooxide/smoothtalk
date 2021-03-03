@@ -258,7 +258,7 @@ app.action('favoriteHobbies', async ({ body, ack, say }) => {
               }
 
         ],
- ,       // text: `Hey there <@${message.user}>!`
+        // text: `Hey there <@${message.user}>!`
     });
 });
 
