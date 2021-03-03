@@ -135,7 +135,7 @@ app.action('static_select-action', async ({ body, ack, say }) => {
 app.action('datepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options);
+    console.log(body.actions[0]);
     await say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
@@ -168,7 +168,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
 app.action('timepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options);
+    console.log(body.actions[0]);
     await say({
         blocks: [
             {
@@ -236,7 +236,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 app.action('favorite_hobbies', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options);
+    console.log(body.actions[0]);
 
     await say({
         blocks: [
@@ -277,7 +277,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
 app.action('number_scale', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options);
+    console.log(body.actions[0]);
     await say(`Thank you <@${body.user.id}> `);
 });
 
