@@ -1,21 +1,41 @@
 // slackbotController.js
 // Import SlackBot model
 SlackBot = require("../model/slackbotModel");
-const botsdk = require("slackbots");
-const axios = require("axios");
+// const botsdk = require("slackbots");
+// const axios = require("axios");
 
-bot = new SlackBot({
-  name: "smooth talk",
-  token: "xoxb-1816610715921-1806517601586-ujTwV2UVnWWvy1Um8QG4btyB",
-});
+// bot = new SlackBot({
+//   name: "smooth talk",
+//   token: "xoxb-1816610715921-1806517601586-ujTwV2UVnWWvy1Um8QG4btyB",
+// });
 
-bot.on("start", () => {
-  const params = {
-    icon_emoji: ":smile:",
+// bot.on("start", () => {
+//   const params = {
+//     icon_emoji: ":smile:",
+//   };
+
+//   bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
+// });
+
+
+exports.new = function saveBotRequest (request) {
+    var slackbotRes = new SlackBot();
+    slackbotRes.userID = request.userID ? request.userID : slackbotRes.userID;
+    slackbotRes.feeling = request.feeling;
+    slackbotRes.freeTimeStart = request.freeTimeStart;
+    slackbotRes.freeTimeStop = request.freeTimeStop;
+    slackbotRes.hobbies = request.hobbies;
+    slackbotRes.numberScaleQuestion = request.numberScaleQuestion;
+    // save the SlackBot rsponse and check for errors
+    slackbotRes.save(function (err) {
+      // if (err)
+      //     res.json(err);
+      res.json({
+        message: "New Response created!",
+        data: slackbotRes,
+      });
+    });
   };
-
-  bot.postMessageToChannel("general", "Welcome to the smooth Talk bot", params);
-});
 
 // Handle index actions
 exports.index = function (req, res) {

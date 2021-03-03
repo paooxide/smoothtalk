@@ -5,7 +5,6 @@
         "app_desc": "Slackbot app to schedule your free time",
         "node_port": 8080,
         "json_indentation": 4,
-        "database": "mongodb+srv://taurus:taurus84881138@cluster-taurus.ppzuy.mongodb.net/slackbotDB?retryWrites=true&w=majority"
     },
     "testing": {
         

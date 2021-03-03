@@ -1,5 +1,15 @@
 const { App } = require('@slack/bolt');
 const dotenv = require('dotenv');
+// let express = require('express');
+// let bodyParser = require('body-parser');
+let mongoose = require('mongoose');
+const config = require('./config/config.js');
+let apiRoutes = require("./routers/api-routes");
+let botController = require("./controller/slackbotController");
+
+
+var botSave = new botController();
+
 
 dotenv.config();
 
@@ -12,6 +22,15 @@ const app = new App({
 
 var userResponse = {};
 
+
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true,useUnifiedTopology: true});
+var db = mongoose.connection;
+
+// Added check for DB connection
+if(!db)
+    console.log(`Error connecting db to ${global.gConfig.app_name} `)
+else
+    console.log(`Db connected successfully to ${global.gConfig.app_name}`)
 
 
 app.message('hello', async ({ message, say }) => {
@@ -293,12 +312,15 @@ app.action('number_scale', async ({ body, ack, say }) => {
 });
 
 console.log(userResponse)
+botSave.saveBotRequest(userResponse)
 
 app.action('button_click', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     await say(`<@${body.user.id}> clicked the button`);
 });
+
+app.use('/api', apiRoutes);
 
 
 (async () => {
