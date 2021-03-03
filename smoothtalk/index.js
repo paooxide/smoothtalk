@@ -104,7 +104,7 @@ app.message('hello', async ({ message, say }) => {
 app.action('static_select-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options);
+    console.log(body.actions[0].selected_options[0].value);
     await say({
         blocks: [
             {
