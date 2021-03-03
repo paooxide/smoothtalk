@@ -10,6 +10,14 @@ const app = new App({
 
 /* Add functionality here */
 
+var userResponse = {
+    userID,
+    feeling,
+    freeTimeStart, 
+    freeTimeStop,
+    hobbies,
+    numberScaleQuestion,
+};
 
 
 
@@ -105,6 +113,7 @@ app.action('static_select-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body.actions[0].selected_option.value);
+    userResponse.feeling=body.actions[0].selected_option.value
     await say({
         blocks: [
             {
@@ -136,14 +145,15 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body.actions[0].selected_date);
-    await say(`<@${body.user.id}> Please select time `);
+    userResponse.freeTimeStart=body.actions[0].selected_date
+    // await say(`<@${body.user.id}> Please select time `);
     await say({
         blocks: [
             {
                 "type": "section",
                 "text": {
                     "type": "mrkdwn",
-                    "text": " "
+                    "text": "Please select time "
                 },
                 "accessory": {
                     "type": "timepicker",
@@ -169,6 +179,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     console.log(body.actions[0].selected_time);
+    userResponse.freeTimeStop=body.actions[0].selected_time
     await say({
         blocks: [
             {
@@ -236,8 +247,12 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 app.action('favorite_hobbies', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions[0].selected_options.value);
-
+    var hobbies ="";
+    console.log(body.actions[0].selected_options);
+    for(hob in body.actions[0].selected_options){
+        hobbies += bob.value + ", " 
+    }
+    userResponse.hobbies=hobbies;
     await say({
         blocks: [
             {
@@ -277,11 +292,13 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
 app.action('number_scale', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
+    userResponse.numberScaleQuestion=body.actions[0].selected_option.value
     console.log(body.actions[0].selected_option.value);
+    console.log(userResponse)
     await say(`Thank you <@${body.user.id}> `);
 });
 
-
+console.log(userResponse)
 
 app.action('button_click', async ({ body, ack, say }) => {
     // Acknowledge the action
