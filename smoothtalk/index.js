@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 let mongoose = require('mongoose');
 const config = require('./config/config.js');
 let apiRoutes = require("./routers/api-routes");
-let botController = require("./controller/slackbotController");
+SlackBot = require("./model/slackbotModel");
 
 
 // var botSave = new botController();
@@ -312,13 +312,36 @@ app.action('number_scale', async ({ body, ack, say }) => {
 });
 
 console.log(userResponse)
-botController.saveBotRequest(userResponse)
+saveBotRequest(userResponse)
 
 app.action('button_click', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
     await say(`<@${body.user.id}> clicked the button`);
 });
+
+
+
+
+function saveBotRequest (request) {
+    var slackbotRes = new SlackBot();
+    slackbotRes.userID = request.userID ? request.userID : slackbotRes.userID;
+    slackbotRes.feeling = request.feeling;
+    slackbotRes.freeTimeStart = request.freeTimeStart;
+    slackbotRes.freeTimeStop = request.freeTimeStop;
+    slackbotRes.hobbies = request.hobbies;
+    slackbotRes.numberScaleQuestion = request.numberScaleQuestion;
+    // save the SlackBot rsponse and check for errors
+    slackbotRes.save(function (err) {
+      // if (err)
+      //     res.json(err);
+      res.json({
+        message: "New Response created!",
+        data: slackbotRes,
+      });
+    });
+  };
+
 
 app.use('/api', apiRoutes);
 
