@@ -168,7 +168,7 @@ app.action('datepicker-action', async ({ body, ack, say }) => {
 app.action('timepicker-action', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options.toString());
+    console.log(body.actions.selected_options);
     await say({
         blocks: [
             {
@@ -236,7 +236,7 @@ app.action('timepicker-action', async ({ body, ack, say }) => {
 app.action('favorite_hobbies', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options.toString());
+    console.log(body.actions.selected_options);
 
     await say({
         blocks: [
@@ -277,7 +277,7 @@ app.action('favorite_hobbies', async ({ body, ack, say }) => {
 app.action('number_scale', async ({ body, ack, say }) => {
     // Acknowledge the action
     await ack();
-    console.log(body.actions.selected_options);
+    console.log(body.actions.selected_options.toString());
     await say(`Thank you <@${body.user.id}> `);
 });
 
