@@ -18,7 +18,7 @@ SlackBot = require("../model/slackbotModel");
 // });
 
 
-exports.new = function saveBotRequest (request) {
+function saveBotRequest (request) {
     var slackbotRes = new SlackBot();
     slackbotRes.userID = request.userID ? request.userID : slackbotRes.userID;
     slackbotRes.feeling = request.feeling;
