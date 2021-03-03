@@ -13,12 +13,12 @@ var botResponseSchema = mongoose.Schema({
         required: true
     },
     freeTimeStart:{
-        type: Date,
+        type: String,
         required: true,
         default: Date.now
     },
     freeTimeStop:{
-        type: Date,
+        type: String,
         required: true
     },
     hobbies:{
